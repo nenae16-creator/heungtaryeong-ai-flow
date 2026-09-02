@@ -6,9 +6,14 @@ PARTS = ROOT / "src" / "parts"
 
 def join(prefix: str, dest: Path) -> None:
     chunks = sorted(PARTS.glob(f"{prefix}-*.txt"))
+    if not chunks:
+        if dest.exists() and dest.stat().st_size > 0:
+            print(f"keep existing {dest}")
+            return
+        raise SystemExit(f"missing parts for {prefix} -> {dest}")
     dest.parent.mkdir(parents=True, exist_ok=True)
-    dest.write_text("".join(p.read_text() for p in chunks), encoding="utf-8")
-    print(f"assembled {dest} from {len(chunks)} parts")
+    dest.write_text("".join(p.read_text(encoding="utf-8") for p in chunks), encoding="utf-8")
+    print(f"assembled {dest} from {len(chunks)} parts ({dest.stat().st_size} bytes)")
 
 
 if __name__ == "__main__":
@@ -19,3 +24,4 @@ if __name__ == "__main__":
     join("load", ROOT / "public" / "data" / "access-load-model.json")
     join("kma", ROOT / "public" / "data" / "weather-kma-snapshot.json")
     join("prog", ROOT / "public" / "data" / "programs-2026.json")
+    join("traffic", ROOT / "public" / "data" / "traffic-snapshot.json")

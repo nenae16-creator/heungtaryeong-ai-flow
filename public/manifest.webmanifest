@@ -2,14 +2,14 @@
   "name": "흥타령 AI FLOW",
   "short_name": "AI FLOW",
   "description": "천안흥타령춤축제 현장용 접근 부하·동선·부스 안내",
-  "start_url": "/heungtaryeong-ai-flow/",
-  "scope": "/heungtaryeong-ai-flow/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#eef2ff",
   "theme_color": "#16244B",
   "icons": [
     {
-      "src": "/heungtaryeong-ai-flow/icon.svg",
+      "src": "./icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
